@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>codex</title>
+    <link rel  = "stylesheet" href = "style.css">
+  </head>
+  <body>
+    <!-- <div id="app"></div> -->
+    <div id = "chat_container"></div>     
+    <form>
+      <textarea name = "prompt" area = "1" cols = "1" placeholder = "Ask Codex ........"></textarea>
+      <button type = "submit"><img src = "assets/send.svg" /></button>
+     <button onclick="return record()"><img src="assets/mic.svg" /></button>
+    </form>
+    <script type="module" src="script.js"></script>
+    <script>
+      function record() {
+        var recognition = new webkitSpeechRecognition();
+        // recognition.lang = "tr"; Turkish recognition but only one can be recognised at a time 
+        recognition.lang = "en-IN";
+
+        recognition.onresult = function (event) {
+          console.log(event);
+          document.getElementsByTagName('textarea')[0].value = event.results[0][0].transcript;
+        }
+
+        recognition.start();
+        return false;
+      }
+    </script>
+  </body>
+</html>
